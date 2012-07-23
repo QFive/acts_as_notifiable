@@ -1,3 +1,6 @@
 = ActsAsNotifiable
 
 This project rocks and uses MIT-LICENSE.
+
+== WIP actively being ported out from QFive
+== http://www.qfive.com
