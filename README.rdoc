@@ -1,4 +1,5 @@
 = ActsAsNotifiable
+{<img src="https://secure.travis-ci.org/QFive/acts_as_notifiable.png" />}[http://travis-ci.org/QFive/acts_as_notifiable]
 
 This project rocks and uses MIT-LICENSE.
 
