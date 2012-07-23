@@ -3,7 +3,7 @@ module ActsAsNotifiable
     module Apns
 
       def self.inject(notifiable)
-        notifiable.notification_before_save << :apns
+        notifiable.notification_before_create << :apns
       end
 
       class Courier < ActsAsNotifiable::Courier

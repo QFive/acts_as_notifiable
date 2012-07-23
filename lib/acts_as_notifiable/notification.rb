@@ -2,12 +2,12 @@ module ActsAsNotifiable
   class Notification < ActiveRecord::Base
     include ActsAsNotifiable::DeliveryMethods
 
-    before_save :notifiable_before_save
+    before_create :notifiable_before_create
     after_create :notifiable_after_create
 
-    def notifiable_before_save
-      notifiable_callback(notifiable, :before_save)
-      notifiable_callback(self, :before_save)
+    def notifiable_before_create
+      notifiable_callback(notifiable, :before_create)
+      notifiable_callback(self, :before_create)
     end
 
     def notifiable_after_create

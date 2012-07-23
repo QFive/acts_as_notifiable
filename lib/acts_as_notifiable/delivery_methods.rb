@@ -9,8 +9,8 @@ module ActsAsNotifiable
         delivery_method.inject self
       end
 
-      def notification_before_save
-        @before_save ||= []
+      def notification_before_craete
+        @before_create ||= []
       end
 
       def notification_after_create
