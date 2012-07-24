@@ -21,7 +21,7 @@ module ActsAsNotifiable
         end
 
         def notifiable_mailer
-          "#{@notifiable.class}NotificationMailer".safe_constantize
+          "#{@notification.notifiable.class}NotificationMailer".safe_constantize
         end
 
         def notification_mailer
