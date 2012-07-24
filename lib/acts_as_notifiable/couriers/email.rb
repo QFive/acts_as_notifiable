@@ -13,7 +13,7 @@ module ActsAsNotifiable
         end
 
         def mailer
-          if @notification.type == 'Notification'
+          if @notification.instance_of? Notification
             notifiable_mailer
           else
             notification_mailer
@@ -21,7 +21,7 @@ module ActsAsNotifiable
         end
 
         def notifiable_mailer
-          "#{notifiable.class}NotificationMailer".safe_constantize
+          "#{@notifiable.class}NotificationMailer".safe_constantize
         end
 
         def notification_mailer
