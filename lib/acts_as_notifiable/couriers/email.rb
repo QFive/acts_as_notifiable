@@ -13,7 +13,7 @@ module ActsAsNotifiable
         end
 
         def mailer
-          if @notification.instance_of? Notification
+          if @notification.instance_of? ::Notification
             notifiable_mailer
           else
             notification_mailer
