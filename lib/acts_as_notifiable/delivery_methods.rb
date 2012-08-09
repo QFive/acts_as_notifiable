@@ -9,7 +9,7 @@ module ActsAsNotifiable
         delivery_method.inject self
       end
 
-      def notification_before_craete
+      def notification_before_create 
         @before_create ||= []
       end
 
