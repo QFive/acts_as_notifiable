@@ -7,11 +7,11 @@ require "acts_as_notifiable/version"
 Gem::Specification.new do |s|
   s.name        = "acts_as_notifiable"
   s.version     = ActsAsNotifiable::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of ActsAsNotifiable."
-  s.description = "TODO: Description of ActsAsNotifiable."
+  s.authors     = ["Damian Galarza"]
+  s.email       = ["damian@qfive.com"]
+  s.homepage    = "http://github.com/QFive/acts_as_notifiable"
+  s.summary     = "Flexible notification system for Rails"
+  s.description = "Flexibile notification system for Rails"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
