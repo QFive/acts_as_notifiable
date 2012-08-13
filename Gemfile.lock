@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    acts_as_notifiable (0.0.2)
+    acts_as_notifiable (0.0.3)
       rails (~> 3.2.6)
 
 GEM
