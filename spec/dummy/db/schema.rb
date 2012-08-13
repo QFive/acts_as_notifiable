@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20120723162854) do
     t.string  "notifiable_type"
     t.integer "target_id"
     t.string  "target_type"
+    t.boolean "apns"
+    t.boolean "apn_processed"
     t.string  "type"
   end
 

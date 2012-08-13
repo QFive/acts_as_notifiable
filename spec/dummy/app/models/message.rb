@@ -4,4 +4,5 @@ class Message < ActiveRecord::Base
 
   notifiable :sender => :sender, :receiver => :receiver
   notify_via :email
+  notify_via :apns
 end
