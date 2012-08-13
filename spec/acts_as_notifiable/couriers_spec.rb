@@ -1,10 +1,14 @@
 require 'spec_helper'
 
-describe ActsAsNotifiable::Courier do
-  it "should deliver a notification" do
-    notification = double("Notification")
+class ActsAsNotifiable::Couriers::SpecCourier < ActsAsNotifiable::Couriers::BaseCourier
+  include ActsAsNotifiable::DeliveryMethods
 
-    ActsAsNotifiable::Courier.any_instance.should_receive(:deliver)
-    ActsAsNotifiable::Courier.deliver(notification)
+  def prepare_notification(notification)
+  end
+end
+
+describe ActsAsNotifiable::Couriers::BaseCourier do
+  it "should deliver a notification" do
+    pending
   end
 end

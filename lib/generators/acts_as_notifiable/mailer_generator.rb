@@ -2,6 +2,8 @@ require 'generators/acts_as_notifiable/generator_helpers'
 
 module ActsAsNotifiable
   module Generators
+
+    # Generate an ActionMailer dedicated to delivering notifications via email
     class MailerGenerator < Rails::Generators::NamedBase
       include GeneratorHelpers
 

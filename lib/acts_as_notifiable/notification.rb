@@ -6,34 +6,32 @@ module ActsAsNotifiable
       class_eval do
         include ActsAsNotifiable::DeliveryMethods
 
-        before_create :notifiable_before_create
-        after_create :notifiable_after_create
+        before_create :prepare
+        after_create :deliver
+
+        belongs_to :sender,     polymorphic: true
+        belongs_to :receiver,   polymorphic: true
+        belongs_to :notifiable, polymorphic: true
+
+        attr_accessible :sender, :receiver, :notifiable
 
         scope :apn, where(:apns => true)
         scope :unprocessed, where(:apn_processed => false)
       end
     end
 
-    def notifiable_before_create
-      notifiable_callback(notifiable, :before_create)
-      notifiable_callback(self, :before_create)
-
-      true
+    # Run any courier notification preparations if there are any
+    #
+    # @see ActsAsNotifiable::Couriers::Courier#prepare
+    def prepare
+      notifiable.class.couriers.each { |c| c.prepare(self) }
     end
 
-    def notifiable_after_create
-      notifiable_callback(notifiable, :after_create)
-      notifiable_callback(self, :after_create)
-
-      true
-    end
-
-    def notifiable_callback(obj, chain)
-      chain = "notification_#{chain}"
-      return unless obj.class.respond_to? chain
-      obj.class.send(chain).each do |c|
-        obj.deliver_via(c, self)
-      end
+    # Deliver the notification via any couriers injected
+    #
+    # @see ActsAsNotifiable::Couriers::Courier#inject
+    def deliver
+      notifiable.class.couriers.each { |c| c.deliver(self) }
     end
 
   end
