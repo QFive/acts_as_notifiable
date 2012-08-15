@@ -35,7 +35,11 @@ module ActsAsNotifiable
     end
 
     def couriers
-      notifiable.class.couriers + self.class.couriers
+      notifiable_couriers.to_a + self.class.couriers.to_a
+    end
+
+    def notifiable_couriers
+      notifiable.class.couriers if notifiable.class.respond_to?(:couriers)
     end
 
   end

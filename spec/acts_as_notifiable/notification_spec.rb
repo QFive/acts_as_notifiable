@@ -1,13 +1,8 @@
 require 'spec_helper'
 
-class Courier; end
 class Notifiable; end
 class CommentNotification < Notification
-  class << self
-    def couriers
-      [Courier]
-    end
-  end
+  notify_via :dummy
 end
 
 describe ActsAsNotifiable::Notification do
@@ -19,7 +14,7 @@ describe ActsAsNotifiable::Notification do
     it "should return couriers defined on the notification class" do
       message.class.stub(:couriers).and_return([])
       notification = CommentNotification.new(notifiable: message)
-      notification.couriers.should == [Courier]
+      notification.couriers.should == [DummyCourier]
     end
 
     it "should return couriers defined on the notifiable class" do
@@ -29,7 +24,7 @@ describe ActsAsNotifiable::Notification do
 
     it "should return the combination of notifiable couriers and notification couriers" do
       notification = CommentNotification.new(notifiable: message)
-      notification.couriers.should == [ActsAsNotifiable::Couriers::EmailCourier, ActsAsNotifiable::Couriers::ApnsCourier, Courier]
+      notification.couriers.should == [ActsAsNotifiable::Couriers::EmailCourier, ActsAsNotifiable::Couriers::ApnsCourier, DummyCourier]
     end
   end
 
@@ -53,15 +48,15 @@ describe ActsAsNotifiable::Notification do
 
       let(:message) { Message.new }
       let(:notification) { CommentNotification.new(notifiable: message) }
-      before { notification.stub(:couriers).and_return([Courier]) }
+      before { message.class.stub(:couriers).and_return([]) }
 
       it "should prepare via couriers specified on the notification class" do
-        Courier.should_receive(:prepare)
+        DummyCourier.should_receive(:prepare)
         notification.prepare
       end
 
       it "should deliver via couriers specified on the notification class" do
-        Courier.should_receive(:deliver)
+        DummyCourier.should_receive(:deliver)
         notification.deliver
       end
 
