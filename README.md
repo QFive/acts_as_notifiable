@@ -27,26 +27,26 @@ Example couriers:
 
 First, you will need a model to hold notifications.
 
-`
+```
 class Notification < ActiveRecord::Base
 	include ActsAsNotifiable::Notification
 end
-`
+````
 
 
 A notification has the following properties:
 
-`
+```
 belongs_to :sender, polymorphic: true
 belongs_to :receiver, polymorphic: true
 belongs_to :notifiable: polymorphic: true
 belongs_to :target, polymorphic: true
-`
+```
 
 ### Notifiable
 With a base notification class in place we can start generating notifications for a user.
 
-`
+```
 class Post < ActiveRecord::Base
 	has_many :comments
 	belongs_to :author
@@ -59,10 +59,10 @@ class Comment < ActiveRecord::Base
 	belongs_to :author
 	belongs_to :post
 end
-`
+```
 Whenever a comment is created, the author of the post the comment belongs to will receive a notification notifying them that the comment author commented on their post.
 
-notify_va specifies any couriers to use to deliver this notification, in this case an email will be generated.
+`notify_via` specifies any couriers to use to deliver this notification, in this case an email will be generated.
 
 ## ToDo
 
