@@ -1,7 +1,7 @@
 # ActsAsNotifiable
 [![Build Status](https://secure.travis-ci.org/QFive/acts_as_notifiable.png)](http://travis-ci.org/QFive/acts_as_notifiable)
 
-ActsAsNotifiable aims to be a flexibile notification system for your Rails application. On social networks, notifications are can be sent from any kind of action. ActsAsNotifiable has 2 goals:
+ActsAsNotifiable aims to be a flexibile notification system for your Rails application. On social networks, notifications can be sent from any kind of action. ActsAsNotifiable has 2 goals:
 
 1. Centralize the creation of notifications on different objects in a system
 2. Provide a modular way to deliver these notifications across various methods
@@ -10,8 +10,8 @@ ActsAsNotifiable aims to be a flexibile notification system for your Rails appli
 Some examples of various things that may generate a notification include:
 
 * A user follows another user
-* A user comments on a user's post
-* A user likes another post
+* A user comments on another user's post
+* A user likes a post
 
 
 ### Couriers
