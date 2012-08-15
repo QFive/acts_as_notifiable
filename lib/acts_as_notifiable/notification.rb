@@ -24,14 +24,18 @@ module ActsAsNotifiable
     #
     # @see ActsAsNotifiable::Couriers::Courier#prepare
     def prepare
-      notifiable.class.couriers.each { |c| c.prepare(self) }
+      couriers.each { |c| c.prepare(self) }
     end
 
     # Deliver the notification via any couriers injected
     #
     # @see ActsAsNotifiable::Couriers::Courier#inject
     def deliver
-      notifiable.class.couriers.each { |c| c.deliver(self) }
+      couriers.each { |c| c.deliver(self) }
+    end
+
+    def couriers
+      notifiable.class.couriers + self.class.couriers
     end
 
   end
