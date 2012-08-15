@@ -10,7 +10,6 @@ module ActsAsNotifiable
       def notify_via(courier_sym)
         courier = courier_by_name(courier_sym)
         couriers << courier
-        courier.inject self if ActsAsNotifiable.injectable_courier?(courier)
       end
 
       # Hold onto a collection of couriers that will be in charge of delivering
