@@ -27,7 +27,7 @@ Example couriers:
 
 First, you will need a model to hold notifications.
 
-```
+```ruby
 class Notification < ActiveRecord::Base
 	include ActsAsNotifiable::Notification
 end
@@ -36,7 +36,7 @@ end
 
 A notification has the following properties:
 
-```
+```ruby
 belongs_to :sender, polymorphic: true
 belongs_to :receiver, polymorphic: true
 belongs_to :notifiable: polymorphic: true
@@ -46,7 +46,7 @@ belongs_to :target, polymorphic: true
 ### Notifiable
 With a base notification class in place we can start generating notifications for a user.
 
-```
+```ruby
 class Post < ActiveRecord::Base
 	has_many :comments
 	belongs_to :author
