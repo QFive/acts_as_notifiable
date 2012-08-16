@@ -47,13 +47,23 @@ belongs_to :target, polymorphic: true
 With a base notification class in place we can start generating notifications for a user.
 
 ```ruby
+class Author < ActiveRecord::Base
+  has_many :posts
+
+  # Set up relations to accept notifications
+  receives_notifications
+end
+
 class Post < ActiveRecord::Base
 	has_many :comments
 	belongs_to :author
 end
 
 class Comment < ActiveRecord::Base
+  # Comments are notifiable, they will send notifications out when created
 	notifiable receiver: lambda { |c| c.post.author }, sender: :author
+
+  # Specify a courier to send notifications, in this case email
 	notify_via :email
 	
 	belongs_to :author
