@@ -7,7 +7,11 @@ module ActsAsNotifiable
       # Specify a courier to deliver notifications with
       #
       # @param [Symbol] courier The courier name as a symbol
-      def notify_via(courier_sym)
+      def notify_via(*couriers)
+        couriers.each { |courier| add_courier courier }
+      end
+
+      def add_courier(courier_sym)
         courier = courier_by_name(courier_sym)
         couriers << courier
       end
