@@ -6,7 +6,7 @@ module ActsAsNotifiable
 
       # Create a notification if there is a receiver to receive it
       def notification_callback
-        notify if notice_receiver
+        notify if notify?
       end
 
       # Notify the receiver(s) of what happend
@@ -23,6 +23,11 @@ module ActsAsNotifiable
         self.notifications.create :receiver      => to_notify,
                                   :sender        => notice_sender,
                                   :target        => notice_target
+      end
+
+      # Determine whether or not the notification should be sent
+      def notify?
+        !notice_receiver.nil?
       end
 
       # Interpret a target which can be either a proc or a method
