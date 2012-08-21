@@ -20,14 +20,17 @@ module ActsAsNotifiable
 
       # Create a notification for the object to notify
       def notify!(to_notify)
+        notify_receiver(to_notify) if notify_receiver?(to_notify)
+      end
+
+      def notify_receiver(to_notify)
         self.notifications.create :receiver      => to_notify,
                                   :sender        => notice_sender,
                                   :target        => notice_target
       end
 
-      # Determine whether or not the notification should be sent
-      def notify?
-        !notice_receiver.nil?
+      def notify_receiver?(receiver)
+        receiver != notice_sender
       end
 
       # Interpret a target which can be either a proc or a method
@@ -58,6 +61,13 @@ module ActsAsNotifiable
       # Determine whether or not a receiver is enumerable
       def enumerable_receiver?
         notice_receiver.is_a? Enumerable
+      end
+
+      private
+
+      # Determine whether or not the notification should be sent
+      def notify?
+        !notice_receiver.nil?
       end
 
     end

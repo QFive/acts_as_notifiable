@@ -114,4 +114,26 @@ describe ActsAsNotifiable::Notifiable::Callback do
     end
   end
 
+  describe "#notify!" do
+    it "should not notify a receiver if the receiver is the same as the sender" do
+      obj = Notifiable.new
+
+      receiver = Receiver.new
+      obj.stub(:receiver_method).and_return(receiver)
+      obj.stub(:sender_method).and_return(receiver)
+      obj.should_not_receive(:notify_receiver).with(receiver)
+      obj.notify
+    end
+
+    it "should notify a receiver" do
+      obj = Notifiable.new
+
+      receiver = Receiver.new
+      obj.stub(:receiver_method).and_return(receiver)
+      obj.stub(:sender_method).and_return(double("Sender"))
+      obj.should_receive(:notify_receiver).with(receiver)
+      obj.notify
+    end
+  end
+
 end
