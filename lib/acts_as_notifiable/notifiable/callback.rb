@@ -50,12 +50,12 @@ module ActsAsNotifiable
 
       # Interpret the notice sender
       def notice_sender
-        interpret_target(self.class.sender)
+        interpret_target(self.class.sender) if self.class.sender
       end
 
       # Interpret the notice target
       def notice_target
-        interpret_target(self.class.target)
+        interpret_target(self.class.target) if self.class.target
       end
 
       # Determine whether or not a receiver is enumerable

@@ -24,6 +24,46 @@ class Notifiable
   def multiple_receivers; end
 end
 
+class OtherNotifiable
+  include ActsAsNotifiable::Notifiable::Callback
+
+  class << self
+    def receiver
+      :receiver_method
+    end
+
+    def sender
+      :sender_method
+    end
+
+    def target
+      :target_method
+    end
+  end
+
+  def receiver_method
+    true
+  end
+
+  def multiple_receivers; end
+end
+
+class OtherNotifiable
+  class << self
+    def receiver
+      nil
+    end
+
+    def sender
+      nil
+    end
+
+    def target
+      nil
+    end
+  end
+end
+
 class Receiver; end
 
 describe ActsAsNotifiable::Notifiable::Callback do
@@ -79,6 +119,11 @@ describe ActsAsNotifiable::Notifiable::Callback do
       obj.should_receive(:interpret_target).with(:sender_method)
       obj.notice_sender
     end
+
+    it "should handle a nil sender gracefully" do
+      obj = OtherNotifiable.new
+      obj.notice_sender.should be_nil
+    end
   end
 
   describe "#notice_target" do
@@ -86,6 +131,11 @@ describe ActsAsNotifiable::Notifiable::Callback do
       obj = Notifiable.new
       obj.should_receive(:interpret_target).with(:target_method)
       obj.notice_target
+    end
+
+    it "should handle a nil target gracefully" do
+      obj = OtherNotifiable.new
+      obj.notice_target.should be_nil
     end
   end
 
