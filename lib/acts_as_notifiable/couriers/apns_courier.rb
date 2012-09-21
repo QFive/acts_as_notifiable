@@ -11,7 +11,7 @@ module ActsAsNotifiable
         @notification.apn_processed = false
       end
 
-      def deliver; end
+      def deliver!; end
     end
 
   end

@@ -41,10 +41,18 @@ module ActsAsNotifiable
 
       # Delivery method which should handle delivery of the notification
       def deliver
+        deliver! if can_deliver?
+      end
+
+      def deliver!
         raise "Deliver must be implemented in child class"
       end
 
       def prepare; end
+
+      def can_deliver?
+        true
+      end
 
       private
 

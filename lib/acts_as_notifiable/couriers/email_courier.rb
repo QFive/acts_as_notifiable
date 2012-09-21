@@ -12,7 +12,7 @@ module ActsAsNotifiable
     class EmailCourier < ActsAsNotifiable::Couriers::BaseCourier
 
       # Deliver an email for the notification to the receiver
-      def deliver
+      def deliver!
         mailer.notification(@notification).deliver
       end
 
