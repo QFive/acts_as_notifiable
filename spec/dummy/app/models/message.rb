@@ -3,6 +3,5 @@ class Message < ActiveRecord::Base
   belongs_to :receiver, class_name: 'User'
 
   notifiable :sender => :sender, :receiver => :receiver
-  notify_via :email
-  notify_via :apns
+  notify_via :email, :apns
 end
