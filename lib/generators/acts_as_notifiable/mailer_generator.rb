@@ -15,9 +15,9 @@ module ActsAsNotifiable
         template "mailer_view.html.erb", File.join("app/views/#{valid_mailer_file_name}/notification.html.erb")
       end
 
-      hook_for :test_framework
-
-      private
+      hook_for :test_framework, as: :mailer do |instance, mailer|
+        instance.invoke mailer, [instance.mailer_class_name]
+      end
 
       def mailer_class_name
         valid_notification_class_name + 'Mailer'
