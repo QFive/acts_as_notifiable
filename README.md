@@ -13,6 +13,14 @@ Some examples of various things that may generate a notification include:
 * A user comments on another user's post
 * A user likes a post
 
+## Inforamtion
+
+### Documentation
+
+RDocs for ActsAsNotifiable are available online here:
+
+[http://rubydoc.info/github/QFive/acts_as_notifiable/frames](http://rubydoc.info/github/QFive/acts_as_notifiable/frames)
+
 
 ### Couriers
 As systems become larger and users have more ways to receive notifications, a flexibile delivery system is needed. ActsAsNotifiable couriers will do just this.
