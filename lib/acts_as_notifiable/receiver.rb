@@ -24,8 +24,8 @@ module ActsAsNotifiable
     # a method named *can_receive_message_notification_email?* on the user which returns true
     # whenever you would like to deliver an email notification.
     #
-    # @param [Symbol] Type of notification to be delivered
-    # @param [Symbol] Name of the courier being used to deliver the notification
+    # @param [Symbol] notification_type Type of notification to be delivered
+    # @param [Symbol] courier_name Name of the courier being used to deliver the notification
     def can_receive_notification?(notification_type, courier_name)
       method = "can_receive_#{notification_type}_#{courier_name}?".to_sym
       unless respond_to?(method)
