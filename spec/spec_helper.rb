@@ -1,3 +1,8 @@
+require 'simplecov'
+SimpleCov.start do
+    add_filter "/spec/dummy/"
+end
+
 require 'rubygems'
 require 'ammeter/init'
 require 'factory_girl'
