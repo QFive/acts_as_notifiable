@@ -30,7 +30,7 @@ describe ActsAsNotifiable::Notification do
 
   describe "#deliver_notification" do
 
-    let(:notification) { Notification.new(notifiable: Message.new) }
+    let(:notification) { Notification.new(notifiable: Message.new, receiver: build_stubbed(:user)) }
 
     context "for notifiable" do
       it "should call deliver on each courier specified on notifiable" do
