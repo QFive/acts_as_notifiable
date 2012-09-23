@@ -54,7 +54,7 @@ module ActsAsNotifiable
       #
       # @see #delivery_check_metho
       def can_deliver?
-        @notification.receiver.send delivery_check_method
+        @notification.receiver.can_receive_notification? notification_type, courier_name
       end
 
       protected
@@ -63,31 +63,16 @@ module ActsAsNotifiable
         @notification.notifiable
       end
 
-      # Build out a method name to call on the notification receiver which can
-      # determine whether or not the receiver should receive a notification from the courier
-      # for this notification.
-      #
-      # When using a custom Notification class, the method will be built off the custom notification class
-      # 
-      # @example NewMessageNotification with EmailCourier
-      #   @notification = NewMessageNotification.new
-      #   delivery_check_method # => can_receive_new_message_notification_email?
-      #
-      # @example General notification class with EmailCourier
-      #   @notification = Notification.new(notifiable: Message.new)
-      #   delivery_check_method # => can_receive_message_notification_email?
-      def delivery_check_method
-        method = "can_receive_"
+      def notification_type
         if @notification.instance_of? ::Notification
-          method << notifiable.class.to_s.underscore.downcase
-          method << '_notification'
+          "#{notifiable.class.to_s.underscore.downcase}_notification".to_sym
         else
-          method << @notification.class.to_s.underscore.downcase
+          @notification.class.to_s.underscore.downcase.to_sym
         end
+      end
 
-        method << "_"
-        method << self.class.to_s.demodulize.downcase.gsub('courier', '')
-        method << '?'
+      def courier_name
+        self.class.to_s.demodulize.downcase.gsub('courier', '').to_sym
       end
     end
 

@@ -62,14 +62,14 @@ describe ActsAsNotifiable::Couriers::BaseCourier do
     context "Custom Notification Class" do
       let(:notification) { build_stubbed(:new_message_notification, receiver: receiver) }
       it "checks with the receiver if it can receiver a notification for the custom notification class and courier" do
-        receiver.should_receive(:can_receive_new_message_notification_test?)
+        receiver.should_receive(:can_receive_notification?).with(:new_message_notification, :test)
         subject.can_deliver?
       end
     end
 
     context "Generic Notification Class" do
       it "checks with the receiver if it can receive a notification for the notifiable object and courier" do
-        receiver.should_receive(:can_receive_message_notification_test?)
+        receiver.should_receive(:can_receive_notification?).with(:message_notification, :test)
         subject.can_deliver?
       end
     end

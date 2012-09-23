@@ -17,19 +17,19 @@ describe ActsAsNotifiable::Receiver do
     end
   end
 
-  describe "Courier Delivery Checks" do
-    context "Default delivery check method" do
-      it "returns true when a method is not defined on the user" do
-        user.can_receive_message_notification_email?.should be_true
+  describe "#can_receive_notification?" do
+    context "Default method" do
+      it "returns true when the delivery check method is not defined" do
+        user.can_receive_notification?(:message_notification, :email).should be_true
       end
 
       it "defines a method to handle future calls to the delivery check" do
-        user.method_missing(:can_receive_message_notification_email?)
+        user.can_receive_notification?(:message_notification, :email)
         user.should respond_to :can_receive_message_notification_email?
       end
     end
 
-    context "Class defined delivery check method" do
+    context "Class defined method" do
       it "uses the class defined instance method" do
         user.class_eval do
           define_method(:can_receive_message_notification_email?) do
@@ -37,7 +37,7 @@ describe ActsAsNotifiable::Receiver do
           end
         end
 
-        user.can_receive_message_notification_email?.should == 'foo'
+        user.can_receive_notification?(:message_notification, :email).should == 'foo'
       end
     end
   end
