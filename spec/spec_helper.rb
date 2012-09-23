@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'ammeter/init'
+require 'factory_girl'
+FactoryGirl.find_definitions
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 require "rails/test_help"
@@ -19,4 +21,5 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = 'random'
+  config.include FactoryGirl::Syntax::Methods
 end
