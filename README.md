@@ -13,7 +13,7 @@ Some examples of various things that may generate a notification include:
 * A user comments on another user's post
 * A user likes a post
 
-## Inforamtion
+## Information
 
 ### Documentation
 
