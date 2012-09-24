@@ -72,7 +72,7 @@ module ActsAsNotifiable
       end
 
       def courier_name
-        self.class.to_s.demodulize.downcase.gsub('courier', '').to_sym
+        self.class.to_s.demodulize.underscore.downcase.gsub('_courier', '').to_sym
       end
     end
 
